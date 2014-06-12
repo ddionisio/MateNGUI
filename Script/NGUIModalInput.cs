@@ -61,9 +61,9 @@ public class NGUIModalInput : MonoBehaviour {
 
         //UICamera.current
         //mController
-       /* if(data.state == InputManager.State.Pressed && UICamera.selectedObject != null) {
-            UICamera.Notify(UICamera.selectedObject, "OnClick", null);
-        }*/
+        /* if(data.state == InputManager.State.Pressed && UICamera.selectedObject != null) {
+             UICamera.Notify(UICamera.selectedObject, "OnClick", null);
+         }*/
     }
 
     void OnInputCancel(InputManager.Info data) {
@@ -78,7 +78,7 @@ public class NGUIModalInput : MonoBehaviour {
                 float time = Time.realtimeSinceStartup;
                 float delta = time - mNextTime;
 
-                InputManager input = Main.instance.input;
+                InputManager input = InputManager.instance;
 
                 if(axisX != InputManager.ActionInvalid) {
                     float x = input.GetAxis(player, axisX);
@@ -132,7 +132,7 @@ public class NGUIModalInput : MonoBehaviour {
     void OnUIModalActive() {
         if(!mInputActive) {
             //bind callbacks
-            InputManager input = Main.instance.input;
+            InputManager input = InputManager.instance;
 
             if(enter != InputManager.ActionInvalid)
                 input.AddButtonCall(player, enter, OnInputEnter);
@@ -157,7 +157,7 @@ public class NGUIModalInput : MonoBehaviour {
     void OnUIModalInactive() {
         if(mInputActive) {
             //unbind callbacks
-            InputManager input = Main.instance != null ? Main.instance.input : null;
+            InputManager input = InputManager.instance;
 
             if(input != null) {
                 if(enter != InputManager.ActionInvalid)

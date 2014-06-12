@@ -27,7 +27,7 @@ public class NGUIModalGraphicsDialog : UIController {
             if(back)
                 back.onClick = OnBackClick;
 
-            RefreshSettings(Main.instance.userSettings);
+            RefreshSettings(Main.userSettings);
         }
         else {
             resolution.onKey = null;
@@ -38,10 +38,10 @@ public class NGUIModalGraphicsDialog : UIController {
                 back.onClick = null;
         }
     }
-    
+
     protected override void OnOpen() {
     }
-    
+
     protected override void OnClose() {
     }
 
@@ -64,7 +64,7 @@ public class NGUIModalGraphicsDialog : UIController {
             mCurResInd++;
             if(mCurResInd == mRes.Length)
                 mCurResInd = 0;
-            
+
             resolutionLabel.text = mResLabels[mCurResInd];
         }
     }
@@ -79,7 +79,7 @@ public class NGUIModalGraphicsDialog : UIController {
 
     void OnApplyClick(GameObject go) {
         Resolution r = mRes[mCurResInd];
-        Main.instance.userSettings.ApplyResolution(r.width, r.height, r.refreshRate, mIsFull);
+        Main.userSettings.ApplyResolution(r.width, r.height, r.refreshRate, mIsFull);
     }
 
     void OnBackClick(GameObject go) {

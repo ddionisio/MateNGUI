@@ -30,11 +30,11 @@ public class NGUIModalCharacterDialog : UIModalCharacterDialog {
     public override void Apply(bool isLocalized, string text, string aName = null, string portraitSpriteRef = null, string[] choices = null) {
         InitData();
 
-        textLabel.text = isLocalized ? GameLocalize.GetText(text) : text;
+        textLabel.text = isLocalized ? GameLocalize.instance.GetText(text) : text;
 
         if(nameLabel != null) {
             if(!string.IsNullOrEmpty(aName)) {
-                nameLabel.text = isLocalized ? GameLocalize.GetText(aName) : aName;
+                nameLabel.text = isLocalized ? GameLocalize.instance.GetText(aName) : aName;
                 nameLabel.gameObject.SetActive(true);
             }
             else {
@@ -65,7 +65,7 @@ public class NGUIModalCharacterDialog : UIModalCharacterDialog {
                     for(int i = 0; i < mNumChoices; i++) {
                         mChoiceEvents[i].listener.gameObject.SetActive(true);
                         if(mChoiceEvents[i].label != null) {
-                            mChoiceEvents[i].label.text = isLocalized ? GameLocalize.GetText(choices[i]) : choices[i];
+                            mChoiceEvents[i].label.text = isLocalized ? GameLocalize.instance.GetText(choices[i]) : choices[i];
                         }
 
                         if(mChoiceEvents[i].keys != null) {

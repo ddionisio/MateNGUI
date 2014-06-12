@@ -30,11 +30,11 @@ public class NGUIInputClick : MonoBehaviour {
     }
 
     void OnDisable() {
-        if(mStarted && Main.instance != null && Main.instance.input != null) {
-            Main.instance.input.RemoveButtonCall(player, action, OnInputEnter);
+        if(mStarted && InputManager.instance != null) {
+            InputManager.instance.RemoveButtonCall(player, action, OnInputEnter);
 
             if(alternate != InputManager.ActionInvalid)
-                Main.instance.input.RemoveButtonCall(player, alternate, OnInputEnter);
+                InputManager.instance.RemoveButtonCall(player, alternate, OnInputEnter);
         }
     }
 
@@ -48,7 +48,7 @@ public class NGUIInputClick : MonoBehaviour {
         if(mIsAxisAction || mIsAxisActionAlt) {
             bool doClick = false;
             if(mIsAxisAction) {
-                float axis = Main.instance.input.GetAxis(player, action);
+                float axis = InputManager.instance.GetAxis(player, action);
                 if(axisCheck < 0.0f) {
                     doClick = axis <= axisCheck;
                 }
@@ -58,7 +58,7 @@ public class NGUIInputClick : MonoBehaviour {
             }
 
             if(mIsAxisActionAlt && !doClick) {
-                float axis = Main.instance.input.GetAxis(player, alternate);
+                float axis = InputManager.instance.GetAxis(player, alternate);
                 if(axisCheck < 0.0f) {
                     doClick = axis <= axisCheck;
                 }
@@ -95,15 +95,15 @@ public class NGUIInputClick : MonoBehaviour {
         mIsAxisAction = false;
         mIsAxisActionAlt = false;
 
-        if(Main.instance != null && Main.instance.input != null) {
-            if(Main.instance.input.GetControlType(action) == InputManager.Control.Button)
-                Main.instance.input.AddButtonCall(player, action, OnInputEnter);
+        if(InputManager.instance != null) {
+            if(InputManager.instance.GetControlType(action) == InputManager.Control.Button)
+                InputManager.instance.AddButtonCall(player, action, OnInputEnter);
             else
                 mIsAxisAction = true;
 
             if(alternate != InputManager.ActionInvalid) {
-                if(Main.instance.input.GetControlType(action) == InputManager.Control.Button)
-                    Main.instance.input.AddButtonCall(player, alternate, OnInputEnter);
+                if(InputManager.instance.GetControlType(action) == InputManager.Control.Button)
+                    InputManager.instance.AddButtonCall(player, alternate, OnInputEnter);
                 else
                     mIsAxisActionAlt = true;
             }

@@ -43,7 +43,7 @@ public class NGUIModalInputBindDialog : UIModalInputBindDialog {
                 mItems[i].primaryListener.onClick = null;
                 mItems[i].secondaryListener.onClick = null;
             }
-            
+
             saveItem.onClick = null;
             cancelItem.onClick = null;
             defaultItem.onClick = null;
@@ -51,24 +51,24 @@ public class NGUIModalInputBindDialog : UIModalInputBindDialog {
     }
 
     void RefreshKeyLabels() {
-        InputManager input = Main.instance.input;
-        
+        InputManager input = InputManager.instance;
+
         for(int i = 0; i < mItems.Length; i++) {
             InputManager.Key key = input.GetBindKey(playerIndex, actions[i].index, actions[i].keys[0]);
             mItems[i].primaryLabel.text = key.isValid ? key.GetKeyString() : "None";
-            
+
             key = input.GetBindKey(playerIndex, actions[i].index, actions[i].keys[1]);
             mItems[i].secondaryLabel.text = key.isValid ? key.GetKeyString() : "None";
         }
-        
+
         NGUILayoutBase.RefreshNow(transform);
     }
-    
+
     protected override void OnOpen() {
         RefreshKeyLabels();
         keyPressGO.SetActive(false);
     }
-    
+
     protected override void OnClose() {
         mLastSelectedObject = null;
         keyPressGO.SetActive(false);
@@ -104,7 +104,7 @@ public class NGUIModalInputBindDialog : UIModalInputBindDialog {
                 mItems[i - 1].secondaryBtnKeys.selectOnDown = mItems[i].secondaryBtnKeys;
             }
 
-            mItems[i].nameLabel.text = actions[i].localized ? GameLocalize.GetText(actions[i].name) : actions[i].name;
+            mItems[i].nameLabel.text = actions[i].localized ? GameLocalize.instance.GetText(actions[i].name) : actions[i].name;
         }
 
         mItems[mItems.Length - 1].primaryBtnKeys.selectOnDown = defaultBtnKeys;
@@ -175,7 +175,7 @@ public class NGUIModalInputBindDialog : UIModalInputBindDialog {
                         Revert(false);
                         UIModalManager.instance.ModalCloseTop();
                     }
-               });
+                });
             }
             else {
                 Revert(false);
@@ -188,7 +188,7 @@ public class NGUIModalInputBindDialog : UIModalInputBindDialog {
 
     void OnDefaultClick(GameObject go) {
         UIModalManager uiMgr = UIModalManager.instance;
-        
+
         if(uiMgr.ModalGetData(UIModalConfirm.modalName) != null) {
             UIModalConfirm.Open(defaultConfirmTitle, defaultConfirmDesc, delegate(bool yes) {
                 if(yes) {
