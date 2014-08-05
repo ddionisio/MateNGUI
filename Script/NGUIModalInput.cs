@@ -32,7 +32,7 @@ public class NGUIModalInput : MonoBehaviour {
     private float mNextTime = 0.0f;
 
     void OnDestroy() {
-        OnUIModalInactive();
+        ONUIModalSetActive(false);
     }
 
     void Awake() {
@@ -43,6 +43,8 @@ public class NGUIModalInput : MonoBehaviour {
                 uiCam.useKeyboard = false; //NGUI shouldn't have hardcoded input logic...bad!
             }
         }
+
+        UIModalManager.instance.activeCallback += ONUIModalSetActive;
     }
 
     void OnInputEnter(InputManager.Info data) {
@@ -129,51 +131,52 @@ public class NGUIModalInput : MonoBehaviour {
         }
     }
 
-    void OnUIModalActive() {
-        if(!mInputActive) {
-            //bind callbacks
-            InputManager input = InputManager.instance;
+    void ONUIModalSetActive(bool b) {
+        if(b) {
+            if(!mInputActive) {
+                //bind callbacks
+                InputManager input = InputManager.instance;
 
-            if(enter != InputManager.ActionInvalid)
-                input.AddButtonCall(player, enter, OnInputEnter);
-
-            if(enterAlt != InputManager.ActionInvalid)
-                input.AddButtonCall(player, enterAlt, OnInputEnter);
-
-            if(cancel != InputManager.ActionInvalid)
-                input.AddButtonCall(player, cancel, OnInputCancel);
-
-            if(cancelAlt != InputManager.ActionInvalid)
-                input.AddButtonCall(player, cancelAlt, OnInputCancel);
-
-            mInputActive = true;
-
-            mAxisXState = AxisState.Up;
-            mAxisYState = AxisState.Up;
-            mNextTime = Time.realtimeSinceStartup;
-        }
-    }
-
-    void OnUIModalInactive() {
-        if(mInputActive) {
-            //unbind callbacks
-            InputManager input = InputManager.instance;
-
-            if(input != null) {
                 if(enter != InputManager.ActionInvalid)
-                    input.RemoveButtonCall(player, enter, OnInputEnter);
+                    input.AddButtonCall(player, enter, OnInputEnter);
 
                 if(enterAlt != InputManager.ActionInvalid)
-                    input.RemoveButtonCall(player, enterAlt, OnInputEnter);
+                    input.AddButtonCall(player, enterAlt, OnInputEnter);
 
                 if(cancel != InputManager.ActionInvalid)
-                    input.RemoveButtonCall(player, cancel, OnInputCancel);
+                    input.AddButtonCall(player, cancel, OnInputCancel);
 
                 if(cancelAlt != InputManager.ActionInvalid)
-                    input.RemoveButtonCall(player, cancelAlt, OnInputCancel);
-            }
+                    input.AddButtonCall(player, cancelAlt, OnInputCancel);
 
-            mInputActive = false;
+                mInputActive = true;
+
+                mAxisXState = AxisState.Up;
+                mAxisYState = AxisState.Up;
+                mNextTime = Time.realtimeSinceStartup;
+            }
+        }
+        else {
+            if(mInputActive) {
+                //unbind callbacks
+                InputManager input = InputManager.instance;
+
+                if(input != null) {
+                    if(enter != InputManager.ActionInvalid)
+                        input.RemoveButtonCall(player, enter, OnInputEnter);
+
+                    if(enterAlt != InputManager.ActionInvalid)
+                        input.RemoveButtonCall(player, enterAlt, OnInputEnter);
+
+                    if(cancel != InputManager.ActionInvalid)
+                        input.RemoveButtonCall(player, cancel, OnInputCancel);
+
+                    if(cancelAlt != InputManager.ActionInvalid)
+                        input.RemoveButtonCall(player, cancelAlt, OnInputCancel);
+                }
+
+                mInputActive = false;
+            }
         }
     }
 }
