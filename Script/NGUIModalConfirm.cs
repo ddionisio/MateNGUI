@@ -27,11 +27,8 @@ public class NGUIModalConfirm : UIModalConfirm {
         }
     }
 
-    protected override void OnOpen() {
+    public override void Open() {
         NGUILayoutBase.RefreshNow(transform);
-    }
-
-    protected override void OnClose() {
     }
 
     void YesClick(GameObject go) {

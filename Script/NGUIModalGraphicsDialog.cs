@@ -39,12 +39,6 @@ public class NGUIModalGraphicsDialog : UIController {
         }
     }
 
-    protected override void OnOpen() {
-    }
-
-    protected override void OnClose() {
-    }
-
     void Awake() {
         mRes = Screen.GetResolution;
         mResLabels = new string[mRes.Length];

@@ -57,6 +57,7 @@ public class NGUILayoutFlow : NGUILayoutBase {
 
         for(int i = 0; i < count; ++i) {
             Transform t = useContents ? _contents[i] : transform.GetChild(i);
+            if(t == null || !t.gameObject.activeSelf) continue;
 
             b = NGUIMath.CalculateRelativeWidgetBounds(t);
             Vector3 scale = t.localScale;
@@ -87,8 +88,7 @@ public class NGUILayoutFlow : NGUILayoutBase {
 
         for(int i = 0; i < count; ++i) {
             Transform t = useContents ? _contents[i] : transform.GetChild(i);
-
-            if(!t.gameObject.activeSelf) continue;
+            if(t == null || !t.gameObject.activeSelf) continue;
 
             b = mBounds[i];
 
@@ -131,6 +131,7 @@ public class NGUILayoutFlow : NGUILayoutBase {
                         case Arrangement.Horizontal:
                             for(int i = 0; i < count; ++i) {
                                 Transform t = useContents ? _contents[i] : transform.GetChild(i);
+                                if(t == null || !t.gameObject.activeSelf) continue;
 
                                 Vector3 pos = t.localPosition;
 
@@ -151,6 +152,7 @@ public class NGUILayoutFlow : NGUILayoutBase {
                         case Arrangement.Vertical:
                             for(int i = 0; i < count; ++i) {
                                 Transform t = useContents ? _contents[i] : transform.GetChild(i);
+                                if(t == null || !t.gameObject.activeSelf) continue;
 
                                 Vector3 pos = t.localPosition;
 
@@ -176,6 +178,7 @@ public class NGUILayoutFlow : NGUILayoutBase {
                     case Arrangement.Horizontal:
                         for(int i = 0; i < count; ++i) {
                             Transform t = useContents ? _contents[i] : transform.GetChild(i);
+                            if(t == null || !t.gameObject.activeSelf) continue;
 
                             Vector3 pos = t.localPosition;
 
@@ -201,6 +204,7 @@ public class NGUILayoutFlow : NGUILayoutBase {
                     case Arrangement.Vertical:
                         for(int i = 0; i < count; ++i) {
                             Transform t = useContents ? _contents[i] : transform.GetChild(i);
+                            if(t == null || !t.gameObject.activeSelf) continue;
 
                             Vector3 pos = t.localPosition;
 
@@ -228,8 +232,10 @@ public class NGUILayoutFlow : NGUILayoutBase {
             case LineUp.End:
                 switch(arrangement) {
                     case Arrangement.Horizontal:
-                        //TODO
-                        foreach(Transform t in transform) {
+                        for(int i = 0; i < count; ++i) {
+                            Transform t = useContents ? _contents[i] : transform.GetChild(i);
+                            if(t == null || !t.gameObject.activeSelf) continue;
+
                             Vector3 pos = t.localPosition;
 
                             switch(lineup2) {
@@ -254,6 +260,7 @@ public class NGUILayoutFlow : NGUILayoutBase {
                     case Arrangement.Vertical:
                         for(int i = 0; i < count; ++i) {
                             Transform t = useContents ? _contents[i] : transform.GetChild(i);
+                            if(t == null || !t.gameObject.activeSelf) continue;
 
                             Vector3 pos = t.localPosition;
 

@@ -64,12 +64,12 @@ public class NGUIModalInputBindDialog : UIModalInputBindDialog {
         NGUILayoutBase.RefreshNow(transform);
     }
 
-    protected override void OnOpen() {
+    public override void Open() {
         RefreshKeyLabels();
         keyPressGO.SetActive(false);
     }
 
-    protected override void OnClose() {
+    public override void Close() {
         mLastSelectedObject = null;
         keyPressGO.SetActive(false);
     }

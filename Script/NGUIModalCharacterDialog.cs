@@ -129,11 +129,11 @@ public class NGUIModalCharacterDialog : UIModalCharacterDialog {
         }
     }
 
-    protected override void OnOpen() {
+    public override void Open() {
         NGUILayoutBase.RefreshNow(transform);
     }
 
-    protected override void OnClose() {
+    public override void Close() {
         //reset choices
         ResetChoices();
     }
