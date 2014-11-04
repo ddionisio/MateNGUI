@@ -12,8 +12,8 @@ public class NGUIInputClickInspector : Editor {
 
         input.player = EditorGUILayout.IntField("Player", input.player);
 
-        input.action = M8.Editor.InputMapper.GUISelectInputAction("Action", input.action);
-        input.alternate = M8.Editor.InputMapper.GUISelectInputAction("Alt. Action", input.alternate);
+        input.action = M8.Editor.InputBinder.GUISelectInputAction("Action", input.action);
+        input.alternate = M8.Editor.InputBinder.GUISelectInputAction("Alt. Action", input.alternate);
 
         input.axisCheck = EditorGUILayout.FloatField("Axis Check", input.axisCheck);
         input.axisDelay = EditorGUILayout.FloatField("Axis Delay", input.axisDelay);
