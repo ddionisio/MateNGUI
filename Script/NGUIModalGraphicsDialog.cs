@@ -27,7 +27,7 @@ public class NGUIModalGraphicsDialog : UIController {
             if(back)
                 back.onClick = OnBackClick;
 
-            RefreshSettings(Main.userSettings);
+            RefreshSettings(UserSettingScreen.instance);
         }
         else {
             resolution.onKey = null;
@@ -73,30 +73,30 @@ public class NGUIModalGraphicsDialog : UIController {
 
     void OnApplyClick(GameObject go) {
         Resolution r = mRes[mCurResInd];
-        Main.userSettings.ApplyResolution(r.width, r.height, r.refreshRate, mIsFull);
+        UserSettingScreen.instance.ApplyResolution(r.width, r.height, r.refreshRate, mIsFull);
     }
 
     void OnBackClick(GameObject go) {
         UIModalManager.instance.ModalCloseTop();
     }
 
-    void RefreshSettings(UserSettings s) {
+    void RefreshSettings(UserSettingScreen uss) {
         mCurResInd = 0;
         for(int i = 0; i < mRes.Length; i++) {
             Resolution r = mRes[i];
-            if(r.width == s.screenWidth && r.height == s.screenHeight && r.refreshRate == s.screenRefreshRate) {
+            if(r.width == uss.screenWidth && r.height == uss.screenHeight && r.refreshRate == uss.screenRefreshRate) {
                 mCurResInd = i;
                 break;
             }
         }
 
-        mIsFull = s.fullscreen;
+        mIsFull = uss.fullscreen;
 
         resolutionLabel.text = mResLabels[mCurResInd];
         fullscreenLabel.text = mIsFull ? "YES" : "NO";
     }
 
-    void UserSettingsChanged(UserSettings s) {
-        RefreshSettings(s);
+    void UserSettingsChanged(UserSetting s) {
+        RefreshSettings(s as UserSettingScreen);
     }
 }
