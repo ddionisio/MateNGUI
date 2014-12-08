@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 [AddComponentMenu("M8/NGUI/ModalConfirm")]
-public class NGUIModalConfirm : UIModalConfirm {
+public class NGUIModalConfirm : M8.UIModal.Dialogs.ConfirmDialogBase {
     public UILabel title;
     public UILabel text;
 

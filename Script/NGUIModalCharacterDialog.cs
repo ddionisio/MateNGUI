@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 [AddComponentMenu("M8/NGUI/ModalCharacterDialog")]
-public class NGUIModalCharacterDialog : UIModalCharacterDialog {
+public class NGUIModalCharacterDialog : M8.UIModal.Dialogs.CharacterDialogBase {
     public UISprite portrait; //optional
     public UILabel nameLabel; //optional
     public UILabel textLabel; //required

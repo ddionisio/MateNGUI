@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NGUIModalGraphicsDialog : UIController {
+public class NGUIModalGraphicsDialog : M8.UIModal.Controller {
     public UIEventListener resolution;
     public UIEventListener fullscreen;
     public UIEventListener apply;
@@ -77,7 +77,7 @@ public class NGUIModalGraphicsDialog : UIController {
     }
 
     void OnBackClick(GameObject go) {
-        UIModalManager.instance.ModalCloseTop();
+        M8.UIModal.Manager.instance.ModalCloseTop();
     }
 
     void RefreshSettings(UserSettingScreen uss) {

@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+using UIModalMgr = M8.UIModal.Manager;
+
 [AddComponentMenu("M8/NGUI/ModalInputBindDialog")]
-public class NGUIModalInputBindDialog : UIModalInputBindDialog {
+public class NGUIModalInputBindDialog : M8.UIModal.Dialogs.InputBindDialogBase {
     public GameObject template;
 
     public Transform itemHolder;
@@ -162,44 +164,30 @@ public class NGUIModalInputBindDialog : UIModalInputBindDialog {
 
     void OnSaveClick(GameObject go) {
         Save();
-        UIModalManager.instance.ModalCloseTop();
+        UIModalMgr.instance.ModalCloseTop();
     }
 
     void OnCancelClick(GameObject go) {
-        UIModalManager uiMgr = UIModalManager.instance;
+        UIModalMgr uiMgr = UIModalMgr.instance;
 
         if(isDirty) {
-            if(uiMgr.ModalGetData(UIModalConfirm.modalName) != null) {
-                UIModalConfirm.Open(cancelConfirmTitle, cancelConfirmDesc, delegate(bool yes) {
-                    if(yes) {
-                        Revert(false);
-                        UIModalManager.instance.ModalCloseTop();
-                    }
-                });
-            }
-            else {
-                Revert(false);
-                UIModalManager.instance.ModalCloseTop();
-            }
-        }
-        else
-            UIModalManager.instance.ModalCloseTop();
-    }
-
-    void OnDefaultClick(GameObject go) {
-        UIModalManager uiMgr = UIModalManager.instance;
-
-        if(uiMgr.ModalGetData(UIModalConfirm.modalName) != null) {
-            UIModalConfirm.Open(defaultConfirmTitle, defaultConfirmDesc, delegate(bool yes) {
+            M8.UIModal.DialogUtil.Confirm(cancelConfirmTitle, cancelConfirmDesc, delegate(bool yes) {
                 if(yes) {
-                    Revert(true);
-                    RefreshKeyLabels();
+                    Revert(false);
+                    uiMgr.ModalCloseTop();
                 }
             });
         }
-        else {
-            Revert(true);
-            RefreshKeyLabels();
-        }
+        else
+            uiMgr.ModalCloseTop();
+    }
+
+    void OnDefaultClick(GameObject go) {
+        M8.UIModal.DialogUtil.Confirm(defaultConfirmTitle, defaultConfirmDesc, delegate(bool yes) {
+            if(yes) {
+                Revert(true);
+                RefreshKeyLabels();
+            }
+        });
     }
 }

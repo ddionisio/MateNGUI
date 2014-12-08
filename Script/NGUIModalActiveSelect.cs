@@ -9,7 +9,7 @@ public class NGUIModalActiveSelect : MonoBehaviour {
 
     public GameObject select;
 
-    private UIController mController;
+    private M8.UIModal.Controller mController;
 
     void OnDestroy() {
         if(mController != null) {
@@ -18,7 +18,7 @@ public class NGUIModalActiveSelect : MonoBehaviour {
     }
 
     void Awake() {
-        mController = GetComponent<UIController>();
+        mController = GetComponent<M8.UIModal.Controller>();
         if(mController != null) {
             mController.onActiveCallback += UIActive;
         }

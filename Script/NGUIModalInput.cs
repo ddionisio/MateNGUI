@@ -44,7 +44,7 @@ public class NGUIModalInput : MonoBehaviour {
             }
         }
 
-        UIModalManager.instance.activeCallback += ONUIModalSetActive;
+        M8.UIModal.Manager.instance.activeCallback += ONUIModalSetActive;
     }
 
     void OnInputEnter(InputManager.Info data) {

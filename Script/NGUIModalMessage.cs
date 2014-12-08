@@ -2,7 +2,7 @@
 using System.Collections;
 
 [AddComponentMenu("M8/NGUI/ModalMessage")]
-public class NGUIModalMessage : UIModalMessage {
+public class NGUIModalMessage : M8.UIModal.Dialogs.MessageDialogBase {
     public UILabel title;
     public UILabel text;
 
