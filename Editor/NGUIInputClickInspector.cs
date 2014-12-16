@@ -2,25 +2,27 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 
-[CustomEditor(typeof(NGUIInputClick))]
-public class NGUIInputClickInspector : Editor {
+namespace M8.NGUI {
+    [CustomEditor(typeof(InputClick))]
+    public class NGUIInputClickInspector : UnityEditor.Editor {
 
-    public override void OnInspectorGUI() {
-        GUI.changed = false;
+        public override void OnInspectorGUI() {
+            GUI.changed = false;
 
-        NGUIInputClick input = target as NGUIInputClick;
+            InputClick input = target as InputClick;
 
-        input.player = EditorGUILayout.IntField("Player", input.player);
+            input.player = EditorGUILayout.IntField("Player", input.player);
 
-        input.action = M8.Editor.InputBinder.GUISelectInputAction("Action", input.action);
-        input.alternate = M8.Editor.InputBinder.GUISelectInputAction("Alt. Action", input.alternate);
+            input.action = M8.EditorExt.InputBinder.GUISelectInputAction("Action", input.action);
+            input.alternate = M8.EditorExt.InputBinder.GUISelectInputAction("Alt. Action", input.alternate);
 
-        input.axisCheck = EditorGUILayout.FloatField("Axis Check", input.axisCheck);
-        input.axisDelay = EditorGUILayout.FloatField("Axis Delay", input.axisDelay);
+            input.axisCheck = EditorGUILayout.FloatField("Axis Check", input.axisCheck);
+            input.axisDelay = EditorGUILayout.FloatField("Axis Delay", input.axisDelay);
 
-        input.checkSelected = EditorGUILayout.Toggle("Check Selected", input.checkSelected);
+            input.checkSelected = EditorGUILayout.Toggle("Check Selected", input.checkSelected);
 
-        if(GUI.changed)
-            EditorUtility.SetDirty(target);
+            if(GUI.changed)
+                EditorUtility.SetDirty(target);
+        }
     }
 }
